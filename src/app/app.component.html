@@ -1,0 +1,69 @@
+<div class="title">Weather app</div>
+
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName" clearable>
+  </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
+  <div class="upper-data">
+    <img src="{{weatherData.current.condition.icon}}">
+    <div class="weather-data">
+      <div class="location">{{weatherData.location.name}}</div>
+      <div class="location-country"><span *ngIf="weatherData.location.region">{{weatherData.location.region}},</span> {{weatherData.location.country}}</div>
+      <div class="location-local-time">{{weatherData.location.localtime | date: 'H:mm a'}}</div>
+      <div class="temperature">{{weatherData.current.temp_c | number: '1.0-0'}}°C</div>
+      <div class="temperature-condition-text">{{weatherData.current.condition.text}}</div>
+    </div>
+  </div>
+
+  <div class="lower-data">
+    <div class="more-info-label">Details</div>
+    <div class="more-info-container">
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png">
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.wind_kph}} km/h
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/pressure.png">
+          <span>pressure</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.pressure_mb}} mb
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/humidity.png">
+          <span>humidity</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.humidity}} %
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/feelslike_temp.png">
+          <span>feels like</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.feelslike_c | number: '1.0-0'}} °C
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
